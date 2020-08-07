@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+<style>
+    #seewho2{
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  color:#fff;
+  text-decoration: none;
+  background-color: #32363d;
+  padding:10px 5px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 5px solid #32363d;
+  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.15);
+transition: all 0.15s ease 0s;
+}
+
+#seewho2:active{
+  position: relative;
+  top:3px;
+  left:2px;
+  box-shadow: 0px 0px;
+}
+
+#seewho2:hover{
+  background-color: #fff;
+  color:#0675B8;
+  font-weight: bold;
+}
+
+<!-- seewho-->
+
+#seewho{
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  color:#fff;
+  text-decoration: none;
+  background-color: #32363d;
+  padding:10px 5px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 5px solid #32363d;
+  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.15);
+transition: all 0.15s ease 0s;
+}
+
+#seewho:active{
+  position: relative;
+  top:3px;
+  left:2px;
+  box-shadow: 0px 0px;
+}
+
+#seewho:hover{
+  background-color: #fff;
+  color:#0675B8;
+  font-weight: bold;
+}
+
+.example_a {
+color: #fff !important;
+text-transform: uppercase;
+text-decoration: none;
+background: #ed3330;
+padding: 20px;
+border-radius: 5px;
+display: inline-block;
+border: none;
+transition: all 0.4s ease 0s;
+}
+
+.example_a:hover {
+background: #434343;
+letter-spacing: 1px;
+-webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+-moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+transition: all 0.4s ease 0s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+
+
+<table class="table table-hover">
+    <tr>
+        <td width="256px"><img src="{{ user.avatar(256) }}"></td>
+        <td>
+            <h1>{{ _('Your profile') }}: {{ current_user.username }}</h1>
+            Your team: {{current_user.room}}
+
+
+            {% if user.last_seen %}
+            <p>{{ _('Last seen on') }}: {{ moment(user.last_seen).format('LLL') }}</p>
+            {% endif %}
+
+
+            <h2><strong>Your role is {{current_user.role}}</strong></h2>
+            {% if current_user.role == 'not yet decided'%}
+            <p> You could be either the Defuser or the Lead Expert. We will first match you with the best teammate then we will distribute the two roles.</p>
+
+            {% elif current_user.role == 'Defuser'%}
+            <p> {{current_user.username}}, your duty is to explain to your teammate how your map looks like. Give them
+                explicit information about where the blue circles are located in the map and where the bomb ( the red
+                triangle) is located. Your duty is to reach the triangle within the given time. </p>
+            {% else %}
+            <p> {{current_user.username}}, your are in possession of a range of mazes. Your duty is to guide your
+                teammate across
+                the correct path. Beware tha they have limited time and limited information available to them so be
+                clear and use the chat box as much as possible.</p>
+            {% endif %}
+
+            {% if user == current_user%}
+
+            <h3>Your big five traits:</h3>
+            <img src="/plot.png" alt="my plot" width="50%" height="50%" margin-left="60%">
+            {% endif %}
+
+
+        </td>
+    </tr>
+</table>
+
+
+{% if current_user.match == 'waiting for a match' %}
+<strong>Hold on Tight! We are matching you up.</strong>
+<p>There are {{how_many}} users registered so far. We need at least 8 participants or an even number (e.g. 10, 12, 14 ... users).</p>
+<button class="example_a" onClick="window.location.reload();">Please Refresh This Page</button>
+{% endif %}
+
+{% for user in users%}
+{% if user.username == match %}
+
+<table class="table table-hover">
+    <tr>
+        <td width="256px"><img src="{{ user.avatar(256) }}"></td>
+        <td>
+            <h1>{{ _('Your match') }}: {{ user.username }}</h1>
+            {{user.room}}
+
+
+            {% if user.last_seen %}
+            <p>{{ _('Last seen on') }}: {{ moment(user.last_seen).format('LLL') }}</p>
+            {% endif %}
+
+            {% if user.username == match %}
+            <h2><strong>Your teammate's role is {{user.role}}</strong></h2>
+            {% if user.role == 'Defuser'%}
+            <p>{{user.username}} is your teammate and Defuser. Their duty is to reach the bomb located on their map on
+                time. They must tell you where the blue identifiers are positioned on their map, then they must be
+                guided by you to reach destination on time.</p>
+            {% else %}
+            <p>{{user.username}} is your teammate and Lead Expert. They have four maps in front of them which contain
+                the detailed mapping of the walls. You must help them identifying which of these maps is yours so that
+                they can help you across the maze.</p>
+
+            {% endif %}
+            {% endif %}
+
+            {% if user != current_user %}
+        </td>
+    </tr>
+
+</table>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.submit() }}
+</form>
+{% else %}
+<h1>We are waiting to math you with someone. Please refresh this page!</h1>
+{% endif %}
+
+
+{% endif %}
+{% endfor%}
+<script>
+$('.popover-dismiss').popover({
+  trigger: 'focus'
+})
+
+
+
+
+
+
+
+
+
+</script>
+{% endblock %}
+
+
+
+
+

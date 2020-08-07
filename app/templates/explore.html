@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+
+<script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+            var socket;
+            $(document).ready(function(){
+                socket = io.connect('http://' + document.domain + ':' + location.port + '/explore');
+                socket.on('connect', function() {
+                    socket.emit('joined', {});
+                });
+                socket.on('status', function(data) {
+                    $('#explore').val($('#explore').val() + '<' + data.msg + '>\n');
+                    $('#explore').scrollTop($('#explore')[0].scrollHeight);
+                });
+                socket.on('message', function(data) {
+                    $('#explore').val($('#explore').val() + data.msg + '\n');
+                    $('#explore').scrollTop($('#explore')[0].scrollHeight);
+                });
+                $('#text').keypress(function(e) {
+                    var code = e.keyCode || e.which;
+                    if (code == 13) {
+                        text = $('#text').val();
+                        $('#text').val('');
+                        socket.emit('text', {msg: text});
+                    }
+                });
+            });
+            function leave_room() {
+                socket.emit('left', {}, function() {
+                    socket.disconnect();
+
+                    // go back to the login page
+                    window.location.href = "{{ url_for('main.user', username=username) }}";
+                });
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</head>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            <strong>Your map as <i>{{current_user.role}}</i></strong>
+            {% if current_user.role == 'Defuser' %}
+            <h3><strong> {{current_user.username }}, Press RUN to start</strong></h3>
+
+            <iframe src="https://trinket.io/embed/pygame/3690509252?outputOnly=true&showInstructions=true" width="100%"
+                    height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+            {% else %}
+            <h3>{{current_user.username }}, you have 4 different maps. Find out which one the Defuser is in.</h3>
+            <img src="/static/leader.png" style="width: 100%">
+            <p>You can download the map here:</p>
+            <a href="/static/leader.png" download>
+                <img src="/static/leader.png" alt="map" width="50" height="50">
+            </a>
+            {% endif %}
+
+
+        </div>
+        <div class="col-sm-4">
+            <strong>Communicate with <i>{{current_user.match}}</i> here</strong>
+            {{wtf.quick_form(textform)}}
+             <strong>After completing the task do not forget to click below the 'End of Task Questionnaire' button </strong>
+        </div>
+
+    </div>
+</div>
+<div class="container">
+    <br>
+    <hr>
+    <a class="btn btn-primary btn-lg btn-block" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+       aria-controls="collapseExample">
+        End of Task Questionnaire ( Click to expand )
+    </a>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            {{wtf.quick_form(form)}}
+        </div>
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}

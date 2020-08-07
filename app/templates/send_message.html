@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% block app_content %}
+<head>
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+</head>
+<style>
+
+
+
+
+
+
+
+</style>
+<div class="header">
+    Welcome {{current_user.username}}! Your teammate is {{current_user.match}}. You are the {{current_user.role}} and
+    {{current_user.match}} is the {{user.role}}.
+    {% if current_user.role == 'Lead Expert'%}
+    You
+    should navigate the Defuser to the bomb through the maze. The Defuser will help you identifying which maze they are
+    in.
+    {% else %}
+    You
+    should tell the Lead Expert how your maze looks like and where bomb is located. The Lead Expert will help you
+    heading there.
+    {% endif%}
+</div>
+{% if user.role == 'Defuser'%}
+
+<div class="jumbotron">
+
+    <div class="header">
+
+        Analyse this image
+    </div>
+    <div class="column"><h5>You can download the map:</h5>
+        <a href="/static/leader.png" download>
+            <img src="/static/leader.png" alt="map" width="50" height="50">
+        </a>
+        <div class="card border-dark mb-3" style="width: 18rem;">
+            <div class="list-group list-group-flush">
+                <h2 class="card-title">Legend</h2>
+                <p class="list-group-item">Circles: Spacial clues</p>
+                <p class="list-group-item">Dots: Coordinates</p>
+                <p class="list-group-item">Lines: Walls</p>
+
+            </div>
+        </div>
+    </div>
+
+
+    <img src="/static/leader.png" class="zoom">
+
+</div>
+
+
+{% else %}
+<div class="jumbotron">
+
+    <div class="header" style="background-color: Eton Blue;">Analyse this image</div>
+    <div class="column"><h5>Download link:</h5>
+        <a href="/static/defuser.png" download>
+            <img src="/static/defuser.png" alt="map" width="50" height="50">
+        </a>
+        <div class="card border-dark mb-3" style="width: 18rem;">
+            <div class="list-group list-group-flush">
+                <h2 class="card-title">Legend</h2>
+                <p class="list-group-item">Circles: Spacial clues</p>
+                <p class="list-group-item">Squares: Coordinates</p>
+                <p class="list-group-item">Yellow man: your position</p>
+                <p class="list-group-item">Triangle: BOMB!</p>
+
+            </div>
+        </div>
+    </div>
+
+
+    <img src="/static/defuser.png" class="zoom">
+
+</div>
+
+{% endif %}
+<div class="jumbotron">
+    <div class="header">
+
+        Communicate with your team mate the best way to get to the bomb.
+        Only one way is the correct way.
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-md-4" style="overflow-y: scroll; height:500px; background-color: #f5f5f5; ">
+                <h2>
+                    {{ _(' Send a Message') }}
+                </h2>
+                {% if user.username == current_user.match %}
+                {{wtf.quick_form(form, id="form")}}
+                {% endif%}
+                <div class="alert alert-info" role="alert">Refresh page if you don't see new messages from your team
+                    mate.
+                </div>
+            </div>
+            <div class="col-md-4" style="overflow-y: scroll; height:500px; background-color: #f5f5f5;"
+                 id="replies">
+                <h2>
+                    {{ _(' Replies from your Teammate') }}
+                </h2>
+                <p>
+                    {% for post in messages %}
+                    {% include '_post.html' %}
+                    {% endfor %}
+
+
+                </p>
+            </div>
+            <div class="col-md-4" style="overflow-y: scroll; height:500px; background-color: #f5f5f5;"
+                 id="sent">
+                <h2>
+                    {{ _('your Messages') }}
+                </h2>
+                <p>
+                    {% for post in messages_sent %}
+                    {% include '_post.html' %}
+                    {% endfor %}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="jumbotron">
+    <div class="header">
+        {% if current_user.role == 'Defuser' %}
+        <a target="_blank" class="btn btn-danger btn-lg btn-block" href="{{ url_for('main.explore', username=username) }}" style="font-size:40px;"
+           >{{ _('Continue the challenge through this link') }}<p>Keep this page open for chatting</p></a>
+        {% else %}
+        <a target="_blank" class="btn btn-danger btn-lg btn-block" href="{{ url_for('main.explore', username=username) }}" style="font-size:40px;"
+           >{{ _('Once finished click here to continue') }}</a>
+        {% endif %}
+
+
+    </div>
+
+</div>
+
+
+{% endblock %}
+
+
