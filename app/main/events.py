@@ -2,7 +2,7 @@ from flask import session
 
 from flask_socketio import emit, join_room, leave_room
 from .. import socketio
-
+from app.models import Chat
 from app import db
 
 
@@ -21,7 +21,13 @@ def text(message):
     """Sent by a client when the user entered a new message.
     The message is sent to all people in the room."""
     room = session.get('room')
+    chat = message['msg']
     emit('message', {'msg': session.get('name') + ':' + message['msg']}, room=room)
+    c = Chat(body=chat)
+    db.session.add(c)
+    db.session.commit()
+
+
 
 
 
