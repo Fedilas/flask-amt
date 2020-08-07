@@ -22,10 +22,11 @@ def text(message):
     The message is sent to all people in the room."""
     db.create_all()
     room = session.get('room')
+    group = str(session.get('room'))
     chat = str(message['msg'])
     user = str(session.get('name'))
     emit('message', {'msg': session.get('name') + ':' + message['msg']}, room=room)
-    c = Chat(body=chat, room=room, user=user)
+    c = Chat(body=chat, room=group, user=user)
 
     db.session.add(c)
     db.session.commit()
