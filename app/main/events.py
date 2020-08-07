@@ -23,8 +23,9 @@ def text(message):
     db.create_all()
     room = session.get('room')
     chat = str(message['msg'])
+    user = str(session.get('name'))
     emit('message', {'msg': session.get('name') + ':' + message['msg']}, room=room)
-    c = Chat(body=chat)
+    c = Chat(body=chat, room=room, user=user)
 
     db.session.add(c)
     db.session.commit()
