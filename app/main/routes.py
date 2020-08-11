@@ -63,6 +63,11 @@ def explore(username):
         current_user.cohesion = form.cohesion.data
         current_user.communication = form.communication.data
         current_user.balance = form.balance.data
+        current_user.balance_extra = form.balance_extra.data
+        current_user.comments = form.comments.data
+        current_user.improve = form.improve.data
+        current_user.keep = form.keep.data
+        current_user.other = form.other.data
         current_user.satisfaction = form.satisfaction.data
 
         flash(_('Your code has been submitted! Thank you!'))

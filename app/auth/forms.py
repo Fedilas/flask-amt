@@ -7,19 +7,19 @@ from app.models import User
 
 class LoginForm(FlaskForm):
     username = StringField(_l('Username'), validators=[DataRequired()])
-    password = PasswordField(_l('Password'), validators=[DataRequired()])
+    password = StringField(_l('AMT id'), validators=[DataRequired()])
     remember_me = BooleanField(_l('Remember Me'))
     submit = SubmitField(_l('Sign In'))
 
 
 class RegistrationForm(FlaskForm):
     username = StringField(_l('Username'), validators=[DataRequired()], render_kw={'placeholder': 'Username'})
-    email = StringField(_l('Email'), validators=[DataRequired(), Email()], render_kw={'placeholder': 'email'})
+    # email = StringField(_l('Email'), validators=[DataRequired(), Email()], render_kw={'placeholder': 'email'})
 
-    password = PasswordField(_l('Password'), validators=[DataRequired()], render_kw={'placeholder': 'password'})
-    password2 = PasswordField(
-        _l('Repeat Password'), validators=[DataRequired(),
-                                           EqualTo('password')], render_kw={'placeholder': 'repeat password'})
+    password = StringField(_l('AMT id'), validators=[DataRequired()], render_kw={'placeholder': 'AMT id'})
+    # password2 = StringField(
+    #     _l('Repeat AMT id'), validators=[DataRequired(),
+    #                                        EqualTo('password')], render_kw={'placeholder': 'repeat AMT id'})
 
     likert_scale = [(None, '---'), ('Very Low', '1. Disagree Strongly'), ('Low', '2. Disagree a Little'), \
                     ('Moderate', '3. Neither Agree nor Disagree'), ('Good', '4. Agree a Little'), \
@@ -66,7 +66,7 @@ class RegistrationForm(FlaskForm):
 
 
 class ResetPasswordRequestForm(FlaskForm):
-    email = StringField(_l('Email'), validators=[DataRequired(), Email()])
+    username = StringField(_l('username'), validators=[DataRequired(), Email()])
     submit = SubmitField(_l('Request Password Reset'))
 
 

@@ -40,7 +40,7 @@ def register():
         return redirect(url_for('main.index'))
     form = RegistrationForm(csrf_enabled=True)
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data,
+        user = User(username=form.username.data,
                     extra=form.extra.data, trust=form.trust.data,
                     lazy=form.lazy.data, relax=form.relax.data,
                     art=form.art.data, social=form.social.data,
@@ -62,7 +62,7 @@ def reset_password_request():
         return redirect(url_for('main.index'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(username=form.username.data).first()
         if user:
             send_password_reset_email(user)
         flash(

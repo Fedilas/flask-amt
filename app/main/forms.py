@@ -49,10 +49,10 @@ class MessageForm(FlaskForm):
 class CodeForm(FlaskForm):
     code = TextAreaField(_l('Insert your code here to get paid for your bonuses'), validators=[
         DataRequired(), Length(min=1, max=140)], render_kw={'id': 'code'})
-    gender = SelectField('Which one of these genders do you identify with?',
+    gender = SelectField('Which gender do you identify with?',
                          choices=[(None, '---'), ('Female', 'Female'), ('Male', 'Male'), ('Other', 'Other'),
                                   ('Prefer not to say', 'Prefer not to say')], coerce=str)
-    age = SelectField('Which one of these age groups do you belong to?',
+    age = SelectField('Which age group do you belong to?',
                       choices=[(None, '---'), ('15-19', '15-19'), ('20-29', '20-29'), ('30-39', '30-39'),
                                ('40-49', '40-49'), ('50+', '50+')], coerce=str)
     nationality = TextAreaField(_l('Your Nationality'), validators=[
@@ -69,16 +69,30 @@ class CodeForm(FlaskForm):
                ('Well', 'Well'),
                ('Very well', 'Very well')]
 
-    performance = SelectField('How well did the team perform?',
+    performance = SelectField('How well, in your opinion, did your team perform?',
                               choices=answers, coerce=str)
-    cohesion = SelectField('How cohesive was the team?',
+    cohesion = SelectField('How cohesive was your team?',
                            choices=answers, coerce=str)
-    communication = SelectField('How well did the team communicate?',
+    communication = SelectField('How well did your team communicate?',
                                 choices=answers, coerce=str)
-    balance = SelectField('Was the teamwork well balanced between the two players?',
-                          choices=answers, coerce=str)
+    balance = SelectField('Did both members of your team contribute equally in your opinion?',
+                          choices=[(None, '---'), ('Yes', 'Yes'), ('No', 'No'), ('Maybe', 'Maybe')], coerce=str)
+    balance_extra = TextAreaField(_l('If not, who contributed more?'), validators=[
+        Optional(), Length(min=1, max=30)])
+
     satisfaction = SelectField('Would you play with the same teammate again?',
                                choices=[(None, '---'), ('Yes', 'Yes'), ('No', 'No'), ('Maybe', 'Maybe')], coerce=str)
+    comments = TextAreaField(_l('Any comments about the game?'), validators=[
+        Optional(), Length(min=1, max=30)])
+
+    improve = TextAreaField(_l('What would you improve about the game?'), validators=[
+        Optional(), Length(min=1, max=30)])
+
+    keep = TextAreaField(_l('What would you keep the same?'), validators=[
+        Optional(), Length(min=1, max=30)])
+
+    other = TextAreaField(_l('Any other comments?'), validators=[
+        Optional(), Length(min=1, max=30)])
 
     submit = SubmitField(render_kw={'id': 'code', "type": "submit", "value": "Submit"})
 
@@ -89,14 +103,14 @@ class ChatForm(FlaskForm):
         Optional()])
     room = StringField('Room', validators=[
         Optional()])
-    submit = SubmitField('Enter the Maze')
+    submit = SubmitField('Enter the Maze', render_kw={'id' :'maze'})
 
 
 class TextForm(FlaskForm):
-    text_area = TextAreaField(_l('Message'), validators=[
+    text_area = TextAreaField(_l(''), validators=[
         DataRequired(), Length(min=10, max=60)], render_kw={'id': 'explore', 'class': 'form-control', 'rows': 7,
-                                                            'placeholder': 'the conversation is displayed here'})
+                                                            'placeholder': ''})
 
-    text = TextAreaField(_l('<strong>Enter your message here</strong>'), validators=[
+    text = TextAreaField(_l('<h4 style="color: blue;"><strong>Enter your message below:</strong></h4>'), validators=[
         DataRequired(), Length(min=1, max=30)], render_kw={'id': 'text', 'placeholder': 'write to your teammate here'})
     submit = SubmitField(render_kw={"style": "display: none"})

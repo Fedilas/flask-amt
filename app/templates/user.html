@@ -110,14 +110,14 @@ transition: all 0.4s ease 0s;
 
 <table class="table table-hover">
     <tr>
-        <td width="256px"><img src="{{ user.avatar(256) }}"></td>
+<!--        <td width="256px"><img src="{{ user.avatar(256) }}"></td>-->
         <td>
-            <h1>{{ _('Your profile') }}: {{ current_user.username }}</h1>
+            <h1>{{ _('Hello') }}, {{ current_user.username }}</h1>
             Your team: {{current_user.room}}
 
 
             {% if user.last_seen %}
-            <p>{{ _('Last seen on') }}: {{ moment(user.last_seen).format('LLL') }}</p>
+<!--            <small style="color:grey;">{{ _('Last seen on') }}: {{ moment(user.last_seen).format('LLL') }}</small>-->
             {% endif %}
 
 
@@ -138,8 +138,8 @@ transition: all 0.4s ease 0s;
 
             {% if user == current_user%}
 
-            <h3>Your big five traits:</h3>
-            <img src="/plot.png" alt="my plot" width="50%" height="50%" margin-left="60%">
+<!--            <h3>Your big five traits:</h3>-->
+<!--            <img src="/plot.png" alt="my plot" width="50%" height="50%" margin-left="60%">-->
             {% endif %}
 
 
@@ -159,14 +159,14 @@ transition: all 0.4s ease 0s;
 
 <table class="table table-hover">
     <tr>
-        <td width="256px"><img src="{{ user.avatar(256) }}"></td>
+<!--        <td width="256px"><img src="{{ user.avatar(256) }}"></td>-->
         <td>
             <h1>{{ _('Your match') }}: {{ user.username }}</h1>
-            {{user.room}}
+
 
 
             {% if user.last_seen %}
-            <p>{{ _('Last seen on') }}: {{ moment(user.last_seen).format('LLL') }}</p>
+<!--            <small style="color:grey;">{{ _('Last seen on') }}: {{ moment(user.last_seen).format('LLL') }}</small>-->
             {% endif %}
 
             {% if user.username == match %}
@@ -191,7 +191,7 @@ transition: all 0.4s ease 0s;
 
 <form method="POST">
     {{ form.hidden_tag() }}
-    {{ form.submit() }}
+    {{ form.submit(class='btn btn-primary btn-lg btn-block') }}
 </form>
 {% else %}
 <h1>We are waiting to math you with someone. Please refresh this page!</h1>
