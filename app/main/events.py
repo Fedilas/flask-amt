@@ -21,7 +21,7 @@ def joined(message):
 def text(message):
     """Sent by a client when the user entered a new message.
     The message is sent to all people in the room."""
-    db.create_all()
+    db.create_all() ## massively important!!
     room = session.get('room')
     group = current_user.room
     chat = str(message['msg'])
