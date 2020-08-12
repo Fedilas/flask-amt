@@ -71,7 +71,33 @@ class CodeForm(FlaskForm):
                                choices=[(None, '---'), ('Yes', 'Yes'), ('No', 'No'), ('Maybe', 'Maybe')], coerce=str)
     comments = TextAreaField(_l('Any comments about the game?'), validators=[
         Optional(), Length(min=1, max=30)])
+    likert_scale = [(None, '---'), ('Very Low', '1. Disagree Strongly'), ('Low', '2. Disagree a Little'), \
+                    ('Moderate', '3. Neither Agree nor Disagree'), ('Good', '4. Agree a Little'), \
+                    ('High', '5. Agree Strongly')]
+    reversed_likert_scale =[(None, '---'), ('High', '1. Disagree Strongly'), ('Good', '2. Disagree a Little'), \
+                 ('Moderate', '3. Neither Agree nor Disagree'), ('Low', '4. Agree a Little'), \
+                 ('Very Low', '5. Agree Strongly')]
 
+    enthusiasm = SelectField('<h3>How do you see yourself as: </h3>Extraverted, enthusiastic', choices=likert_scale, coerce=str)
+    critical = SelectField('Critical, quarrelsome', choices=reversed_likert_scale,
+                             coerce=str)
+    dependable = SelectField('Dependable, self-disciplined', choices=likert_scale,
+                             coerce=str)
+    anxious = SelectField('Anxious, easily upset', choices=reversed_likert_scale,
+                           coerce=str)
+    complex = SelectField('Open to new experiences, complex', choices=likert_scale,
+                             coerce=str)
+    reserved = SelectField('Reserved, quiet', choices=reversed_likert_scale,
+                          coerce=str)
+
+    warm = SelectField('Sympathetic, warm', choices=likert_scale,
+                          coerce=str)
+    careless = SelectField('Disorganised, careless', choices=reversed_likert_scale,
+                           coerce=str)
+    calm = SelectField('Calm, emotionally stable', choices=likert_scale,
+                       coerce=str)
+    uncreative = SelectField('Conventional, uncreative', choices=reversed_likert_scale,
+                           coerce=str)
     improve = TextAreaField(_l('<h3>About the task</h3>What would you improve about the game?'), validators=[
         Optional(), Length(min=1, max=30)])
 

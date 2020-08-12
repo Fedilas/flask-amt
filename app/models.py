@@ -108,6 +108,18 @@ class User(UserMixin, db.Model):
     improve = db.Column(db.String(120))
     keep = db.Column(db.String(120))
     other = db.Column(db.String(120))
+    enthusiasm = db.Column(db.String(120))
+    ## TIPI
+    critical = db.Column(db.String(120))
+    dependable = db.Column(db.String(120))
+    anxious = db.Column(db.String(120))
+    complex = db.Column(db.String(120))
+    reserved = db.Column(db.String(120))
+    warm = db.Column(db.String(120))
+    careless = db.Column(db.String(120))
+    calm = db.Column(db.String(120))
+    uncreative = db.Column(db.String(120))
+
     #room
     room = db.Column(db.String(120))
     satisfaction = db.Column(db.String(120))

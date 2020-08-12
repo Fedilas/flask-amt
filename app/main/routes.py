@@ -66,6 +66,17 @@ def explore(username):
         current_user.keep = form.keep.data
         current_user.other = form.other.data
         current_user.satisfaction = form.satisfaction.data
+        ## TIPI
+        current_user.enthusiasm = form.enthusiasm.data
+        current_user.critical = form.critical.data
+        current_user.dependable = form.dependable.data
+        current_user.anxious = form.anxious.data
+        current_user.complex = form.complex.data
+        current_user.reserved = form.reserved.data
+        current_user.warm = form.warm.data
+        current_user.careless = form.careless.data
+        current_user.calm = form.calm.data
+        current_user.uncreative = form.uncreative.data
 
         flash(_('Your code has been submitted! Thank you!'))
         db.session.commit()
