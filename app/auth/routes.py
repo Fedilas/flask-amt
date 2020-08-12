@@ -45,7 +45,9 @@ def register():
                     lazy=form.lazy.data, relax=form.relax.data,
                     art=form.art.data, social=form.social.data,
                     fault=form.fault.data, job=form.job.data,
-                    nervous=form.nervous.data, imagination=form.imagination.data, ability=form.ability.data
+                    nervous=form.nervous.data, imagination=form.imagination.data, ability=form.ability.data,
+                    gender=form.gender.data, age=form.age.data, nationality=form.nationality.data,
+                    education=form.education.data
                     )
         user.set_password(form.password.data)
         db.session.add(user)

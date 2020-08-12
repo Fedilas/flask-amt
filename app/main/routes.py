@@ -54,10 +54,7 @@ def explore(username):
     form = CodeForm()
     if form.validate_on_submit():
         current_user.code = form.code.data
-        current_user.gender = form.gender.data
-        current_user.age = form.age.data
-        current_user.nationality = form.nationality.data
-        current_user.education = form.education.data
+
         current_user.experience = form.experience.data
         current_user.performance = form.performance.data
         current_user.cohesion = form.cohesion.data

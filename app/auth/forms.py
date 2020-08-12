@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, RadioField
-from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, RadioField, TextAreaField
+from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
 from flask_babel import _, lazy_gettext as _l
 from app.models import User
 
@@ -24,6 +24,20 @@ class RegistrationForm(FlaskForm):
     likert_scale = [(None, '---'), ('Very Low', '1. Disagree Strongly'), ('Low', '2. Disagree a Little'), \
                     ('Moderate', '3. Neither Agree nor Disagree'), ('Good', '4. Agree a Little'), \
                     ('High', '5. Agree Strongly')]
+    gender = SelectField('<h3>Demographics</h3> Which gender do you identify with?',
+                         choices=[(None, '---'), ('Female', 'Female'), ('Male', 'Male'), ('Other', 'Other'),
+                                  ('Prefer not to say', 'Prefer not to say')], coerce=str)
+    age = SelectField('Which age group do you belong to?',
+                      choices=[(None, '---'), ('15-19', '15-19'), ('20-29', '20-29'), ('30-39', '30-39'),
+                               ('40-49', '40-49'), ('50+', '50+')], coerce=str)
+    nationality = TextAreaField(_l('Your Nationality'), validators=[
+        DataRequired(), Length(min=1, max=30)], render_kw={'id': 'nationality'})
+    education = SelectField('Your educational background',
+                            choices=[(None, '---'), ('Less than High School', 'Less than High School'),
+                                     ('High School', 'High School'),
+                                     ('Some College', 'Some College'),
+                                     ('College Degree', 'College Degree'),
+                                     ('Postgraduate Education', 'Postgraduate Education')], coerce=str)
 
     extra = SelectField(
         '<h3>Personality Traits</h3> I am reserved',

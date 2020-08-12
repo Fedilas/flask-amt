@@ -1,6 +1,6 @@
 from flask import request
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField, SelectField
+from wtforms import StringField, SubmitField, TextAreaField, SelectField, RadioField
 from wtforms.validators import ValidationError, DataRequired, Length, Optional
 from flask_babel import _, lazy_gettext as _l
 from app.models import User
@@ -47,29 +47,16 @@ class MessageForm(FlaskForm):
 
 
 class CodeForm(FlaskForm):
-    code = TextAreaField(_l('Insert your code here to get paid for your bonuses'), validators=[
+    code = TextAreaField(_l('<h3><strong>End of task UNIQUE CODE</strong></h3>Insert your code here to get paid for your bonuses'), validators=[
         DataRequired(), Length(min=1, max=140)], render_kw={'id': 'code'})
-    gender = SelectField('Which gender do you identify with?',
-                         choices=[(None, '---'), ('Female', 'Female'), ('Male', 'Male'), ('Other', 'Other'),
-                                  ('Prefer not to say', 'Prefer not to say')], coerce=str)
-    age = SelectField('Which age group do you belong to?',
-                      choices=[(None, '---'), ('15-19', '15-19'), ('20-29', '20-29'), ('30-39', '30-39'),
-                               ('40-49', '40-49'), ('50+', '50+')], coerce=str)
-    nationality = TextAreaField(_l('Your Nationality'), validators=[
-        DataRequired(), Length(min=1, max=30)], render_kw={'id': 'nationality'})
-    education = SelectField('Your educational background',
-                            choices=[(None, '---'), ('Less than High School', 'Less than High School'),
-                                     ('High School', 'High School'),
-                                     ('Some College', 'Some College'),
-                                     ('College Degree', 'College Degree'),
-                                     ('Postgraduate Education', 'Postgraduate Education')], coerce=str)
-    experience = SelectField('Have you played similar games before?',
-                             choices=[(None, '---'), ('Yes', 'Yes'), ('No', 'No'), ('Maybe', 'Maybe')], coerce=str)
+
+    experience = SelectField('<h3>About the game</h3> Have you played similar games before?',
+                             choices=[(None, '---'),('Yes', 'Yes'), ('No', 'No'), ('Maybe', 'Maybe')], coerce=str)
     answers = [(None, '---'), ('Very poorly', 'Very poorly'), ('Poorly', 'Poorly'), ('Moderately', 'Moderately'),
                ('Well', 'Well'),
                ('Very well', 'Very well')]
 
-    performance = SelectField('How well, in your opinion, did your team perform?',
+    performance = SelectField('<h3>About the teamwork</h3>How well, in your opinion, did your team perform?',
                               choices=answers, coerce=str)
     cohesion = SelectField('How cohesive was your team?',
                            choices=answers, coerce=str)
@@ -85,7 +72,7 @@ class CodeForm(FlaskForm):
     comments = TextAreaField(_l('Any comments about the game?'), validators=[
         Optional(), Length(min=1, max=30)])
 
-    improve = TextAreaField(_l('What would you improve about the game?'), validators=[
+    improve = TextAreaField(_l('<h3>About the task</h3>What would you improve about the game?'), validators=[
         Optional(), Length(min=1, max=30)])
 
     keep = TextAreaField(_l('What would you keep the same?'), validators=[
