@@ -82,8 +82,15 @@
         <div class="col-sm-4">
 
             {{wtf.quick_form(textform)}}
-            <strong>After completing the task do not forget to click below the 'End of Task Questionnaire'
-                button </strong>
+            <p>After completing the task do not forget to click below the 'End of Task Questionnaire'
+                button. </p>
+
+            {% if current_user.role == 'Defuser' %}
+            <br>
+            <img src="/static/Arrow_keys.jpg" style="width: 35%">
+            <p>You can navigate the maze using the arrow keys on your keyboard.</p>
+            {% endif %}
+
         </div>
 
     </div>
