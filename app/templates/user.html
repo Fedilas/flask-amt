@@ -126,10 +126,12 @@ transition: all 0.4s ease 0s;
             <p> You could be either the Defuser or the Lead Expert. We will first match you with the best teammate then we will distribute the two roles.</p>
 
             {% elif current_user.role == 'Defuser'%}
+            <img src="/static/defuser_guide.png" style="width: 100%">
             <p> {{current_user.username}}, your duty is to explain to your teammate how your map looks like. Give them
                 explicit information about where the blue circles are located in the map and where the bomb ( the red
                 triangle) is located. Your duty is to reach the triangle within the given time. </p>
             {% else %}
+            <img src="/static/lead_guide.png" style="width: 100%">
             <p> {{current_user.username}}, your are in possession of a range of mazes. Your duty is to guide your
                 teammate across
                 the correct path. Beware tha they have limited time and limited information available to them so be
