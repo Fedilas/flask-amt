@@ -64,8 +64,7 @@ class CodeForm(FlaskForm):
                                 choices=answers, coerce=str)
     balance = SelectField('Did both members of your team contribute equally in your opinion?',
                           choices=[(None, '---'), ('Yes', 'Yes'), ('No', 'No'), ('Maybe', 'Maybe')], coerce=str)
-    balance_extra = TextAreaField(_l('If not, who contributed more?'), validators=[
-        Optional(), Length(min=1, max=30)])
+    balance_extra = SelectField(_l('If not, who contributed more?'), choices=[(None, '---'), ('Myself', 'Myself'), ('Teammate', 'My teammate')], coerce=str)
 
     satisfaction = SelectField('Would you play with the same teammate again?',
                                choices=[(None, '---'), ('Yes', 'Yes'), ('No', 'No'), ('Maybe', 'Maybe')], coerce=str)
