@@ -56,6 +56,10 @@
 
 
 
+
+
+
+
 </script>
 </head>
 <div class="container">
@@ -82,14 +86,26 @@
         <div class="col-sm-4">
 
             {{wtf.quick_form(textform)}}
-            <p>After completing the task do not forget to click below the 'End of Task Questionnaire'
-                button. </p>
+
+            <p>Play the audio guide below:</p>
 
             {% if current_user.role == 'Defuser' %}
             <br>
             <img src="/static/Arrow_keys.jpg" style="width: 35%">
             <p>You can navigate the maze using the arrow keys on your keyboard.</p>
+
+            <video width="320" height="240" controls>
+                <source src="/static/Defuser_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            {% else %}
+            <video width="320" height="240" controls>
+                <source src="/static/Lead_expert.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
             {% endif %}
+            <strong>After completing the task do not forget to click below the 'End of Task Questionnaire'
+                button. </strong>
 
         </div>
 
@@ -105,7 +121,7 @@
     </a>
     <div class="collapse" id="collapseExample">
         <div class="card card-body">
-                        {{wtf.quick_form(form)}}
+            {{wtf.quick_form(form)}}
 
         </div>
 
