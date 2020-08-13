@@ -62,8 +62,8 @@ class RegistrationForm(FlaskForm):
     imagination = SelectField('I have an active imagination', choices=likert_scale, coerce=str)
     ability = SelectField(
         'I see myself as someone whose abilities needed for team work are..',
-        choices=[(None, '---'), ('Very Low', 'Very Low'), ('Low', 'Low'), \
-                 ('Moderate', 'Moderate'), ('Good', 'Good'), \
+        choices=[(None, '---'), ('Low', 'Low'), \
+                 ('Good', 'Good'), \
                  ('High', 'High')], coerce=str)
 
     submit = SubmitField(_l('Register'))
