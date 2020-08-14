@@ -221,7 +221,9 @@ def user(username):
         input = algo.pipe(input).result
         return input
 
-    if len(users) >= 8 and len(users) % 2 == 0:
+    threshold = 4
+
+    if len(users) >= threshold and len(users) % 2 == 0:
         ordered_stable_match = algorithmia(input)
 
         # reversed_stable_match = algorithmia(input_reversed)
@@ -290,7 +292,7 @@ def user(username):
     return render_template('user.html', user=user, posts=posts.items,
                            next_url=next_url, prev_url=prev_url,
                            match=current_user.match, users=users, how_many=how_many, matched_pairs=matched_pairs,
-                           form=form)
+                           form=form, threshold=threshold)
 
 
 # @bp.route('/plot.png')

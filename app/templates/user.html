@@ -152,7 +152,7 @@ transition: all 0.4s ease 0s;
 
 {% if current_user.match == 'waiting for a match' %}
 <strong>Hold on Tight! We are matching you up.</strong>
-<p>There are {{how_many}} users registered so far. We need at least 8 participants or an even number (e.g. 10, 12, 14 ... users).</p>
+<p>There are {{how_many}} users registered so far. We need at least {{threshold}} participants or an even number (e.g. 10, 12, 14 ... users).</p>
 <button class="example_a" onClick="window.location.reload();">Please Refresh This Page</button>
 {% endif %}
 
