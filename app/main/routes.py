@@ -141,7 +141,7 @@ def user(username):
         i.ability = transform_score(i.ability)
         i.match = None
         db.session.commit()
-        i.user_list = [i.extraversion, i.agreeableness, i.conscientiousness, i.neuroticism, i.openness]
+        i.user_list = [i.extraversion, i.agreeableness, i.conscientiousness, i.neuroticism, i.openness, i.ability]
         i.user_array = np.asarray(i.user_list)
         i.user_array = [int(numeric_string) for numeric_string in i.user_array]
         users_data.append(i.user_array)
@@ -152,7 +152,7 @@ def user(username):
         # https://stackoverflow.com/questions/30024612/calculating-similarity-between-two-profiles-for-number-of-common-features
     current_user.user_list = [transform_score(current_user.extraversion), transform_score(current_user.agreeableness),
                               transform_score(current_user.conscientiousness),
-                              transform_score(current_user.neuroticism), transform_score(current_user.openness)]
+                              transform_score(current_user.neuroticism), transform_score(current_user.openness), transform_score(current_user.ability)]
     current_user.user_array = np.array(current_user.user_list)
     current_user.user_array = [int(numeric_string) for numeric_string in current_user.user_array]
     current_user.user_array = np.sqrt(current_user.user_array)  # sqrt of current user array
@@ -293,52 +293,52 @@ def user(username):
                            form=form)
 
 
-@bp.route('/plot.png')
-@login_required
-def plot_png():
-    fig = create_figure()
-    output = io.BytesIO()
-    FigureCanvas(fig).print_png(output)
-    return Response(output.getvalue(), mimetype='image/png')
-
-
-def transform_score(score):
-    if score == 'Very Low':
-        score = 1
-    elif score == 'Low':
-        score = 2
-    elif score == 'Moderate':
-        score = 3
-    elif score == 'Good':
-        score = 4
-    elif score == 'High':
-        score = 5
-
-        return score
-    return score
-
-
-def create_figure():
-    users = User.query.all()
-    for i in users:
-        i.user_list = [i.extraversion, i.agreeableness,
-                       i.conscientiousness,
-                       i.neuroticism, i.openness]
-
-        i.user_list = [int(numeric_string) for numeric_string in i.user_list]
-
-    fig = Figure()
-    cols = ["extraversion", "agreeableness", "conscientiousness", "neuroticism", "openness"]
-    data = i.user_list
-    angles = np.linspace(0, 2 * np.pi, len(cols), endpoint=False)
-    stats = np.concatenate((data, [data[0]]))
-    angles = np.concatenate((angles, [angles[0]]))
-    ax = fig.add_subplot(111, polar=True)
-    ax.plot(angles, stats, "o-")
-    ax.fill(angles, stats, alpha=0.25)
-    ax.set_thetagrids(angles * 180 / np.pi, cols)
-
-    return fig
+# @bp.route('/plot.png')
+# @login_required
+# def plot_png():
+#     fig = create_figure()
+#     output = io.BytesIO()
+#     FigureCanvas(fig).print_png(output)
+#     return Response(output.getvalue(), mimetype='image/png')
+#
+#
+# def transform_score(score):
+#     if score == 'Very Low':
+#         score = 1
+#     elif score == 'Low':
+#         score = 2
+#     elif score == 'Moderate':
+#         score = 3
+#     elif score == 'Good':
+#         score = 4
+#     elif score == 'High':
+#         score = 5
+#
+#         return score
+#     return score
+#
+#
+# def create_figure():
+#     users = User.query.all()
+#     for i in users:
+#         i.user_list = [i.extraversion, i.agreeableness,
+#                        i.conscientiousness,
+#                        i.neuroticism, i.openness]
+#
+#         i.user_list = [int(numeric_string) for numeric_string in i.user_list]
+#
+#     fig = Figure()
+#     cols = ["extraversion", "agreeableness", "conscientiousness", "neuroticism", "openness"]
+#     data = i.user_list
+#     angles = np.linspace(0, 2 * np.pi, len(cols), endpoint=False)
+#     stats = np.concatenate((data, [data[0]]))
+#     angles = np.concatenate((angles, [angles[0]]))
+#     ax = fig.add_subplot(111, polar=True)
+#     ax.plot(angles, stats, "o-")
+#     ax.fill(angles, stats, alpha=0.25)
+#     ax.set_thetagrids(angles * 180 / np.pi, cols)
+#
+#     return fig
 
 
 @bp.route('/user/<username>/popup', methods=['GET', 'POST'])

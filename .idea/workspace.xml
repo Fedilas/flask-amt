@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="81bf7dda-c40f-4847-a48b-e30ba83adc79" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/static/example_defuser.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/example_lead_expert.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/Defuser_video.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/Lead_expert.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/defuser.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/defuser_example.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/defuser_guide.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/lead_guide.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/leader.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/leader_example.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/loading.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/explore.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/explore.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/routes.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
