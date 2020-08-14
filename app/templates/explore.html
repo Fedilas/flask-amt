@@ -60,25 +60,31 @@
 
 
 
+
+
+
+
+
 </script>
 </head>
 <div class="container">
     <div class="row">
         <div class="col-sm-8">
             <strong>Your map as <i>{{current_user.role}}</i></strong>
-            {% if current_user.role == 'Defuser' %}
             <h3><strong> {{current_user.username }}, Press RUN to start</strong></h3>
+            {% if current_user.role == 'Defuser' %}
 
-            <iframe src="https://trinket.io/embed/pygame/3690509252?outputOnly=true&showInstructions=true" width="100%"
-                    height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+
+            <iframe src="https://trinket.io/embed/pygame/3690509252?outputOnly=true" width="100%" height="600"
+                    frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+
+
             {% else %}
-            <h3>{{current_user.username }}, you have 4 different maps. Find out which one {{current_user.match}} is
-                in.</h3>
-            <img src="/static/leader.png" style="width: 100%">
-            <p>You can download the map here:</p>
-            <a href="/static/leader.png" download>
-                <img src="/static/leader.png" alt="map" width="50" height="50">
-            </a>
+
+            <iframe src="https://trinket.io/embed/pygame/48cda838f3?outputOnly=true" width="100%" height="600"
+                    frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+
+
             {% endif %}
 
 
@@ -94,15 +100,15 @@
             <img src="/static/Arrow_keys.jpg" style="width: 35%">
             <p>You can navigate the maze using the arrow keys on your keyboard.</p>
 
-            <video width="320" height="240" controls>
-                <source src="/static/Defuser_video.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+            <!--            <video width="320" height="240" controls>-->
+            <!--                <source src="/static/Defuser_video.mp4" type="video/mp4">-->
+            <!--                Your browser does not support the video tag.-->
+            <!--            </video>-->
             {% else %}
-            <video width="320" height="240" controls>
-                <source src="/static/Lead_expert.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+            <!--            <video width="320" height="240" controls>-->
+            <!--                <source src="/static/Lead_expert.mp4" type="video/mp4">-->
+            <!--                Your browser does not support the video tag.-->
+            <!--            </video>-->
             {% endif %}
             <strong>After completing the task do not forget to click below the 'End of Task Questionnaire'
                 button. </strong>

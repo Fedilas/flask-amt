@@ -126,16 +126,16 @@ transition: all 0.4s ease 0s;
             <p> You could be either the Defuser or the Lead Expert. We will first match you with the best teammate then we will distribute the two roles.</p>
 
             {% elif current_user.role == 'Defuser'%}
-            <img src="/static/defuser_guide.png" style="width: 100%">
-            <p> {{current_user.username}}, your duty is to explain to your teammate how your map looks like. Give them
-                explicit information about where the blue circles are located in the map and where the bomb ( the red
-                triangle) is located. Your duty is to reach the triangle within the given time. </p>
+<!--            <img src="/static/defuser_guide.png" style="width: 100%">-->
+<!--            <p> {{current_user.username}}, your duty is to explain to your teammate how your map looks like. Give them-->
+<!--                explicit information about where the blue circles are located in the map and where the bomb ( the red-->
+<!--                triangle) is located. Your duty is to reach the triangle within the given time. </p>-->
             {% else %}
-            <img src="/static/lead_guide.png" style="width: 100%">
-            <p> {{current_user.username}}, your are in possession of a range of mazes. Your duty is to guide your
-                teammate across
-                the correct path. Beware tha they have limited time and limited information available to them so be
-                clear and use the chat box as much as possible.</p>
+<!--            <img src="/static/lead_guide.png" style="width: 100%">-->
+<!--            <p> {{current_user.username}}, your are in possession of a range of mazes. Your duty is to guide your-->
+<!--                teammate across-->
+<!--                the correct path. Beware tha they have limited time and limited information available to them so be-->
+<!--                clear and use the chat box as much as possible.</p>-->
             {% endif %}
 
             {% if user == current_user%}
@@ -174,13 +174,13 @@ transition: all 0.4s ease 0s;
             {% if user.username == match %}
             <h2><strong>Your teammate's role is {{user.role}}</strong></h2>
             {% if user.role == 'Defuser'%}
-            <p>{{user.username}} is your teammate and Defuser. Their duty is to reach the bomb located on their map on
-                time. They must tell you where the blue identifiers are positioned on their map, then they must be
-                guided by you to reach destination on time.</p>
+<!--            <p>{{user.username}} is your teammate and Defuser. Their duty is to reach the bomb located on their map on-->
+<!--                time. They must tell you where the blue identifiers are positioned on their map, then they must be-->
+<!--                guided by you to reach destination on time.</p>-->
             {% else %}
-            <p>{{user.username}} is your teammate and Lead Expert. They have four maps in front of them which contain
-                the detailed mapping of the walls. You must help them identifying which of these maps is yours so that
-                they can help you across the maze.</p>
+<!--            <p>{{user.username}} is your teammate and Lead Expert. They have four maps in front of them which contain-->
+<!--                the detailed mapping of the walls. You must help them identifying which of these maps is yours so that-->
+<!--                they can help you across the maze.</p>-->
 
             {% endif %}
             {% endif %}
