@@ -50,6 +50,7 @@ def register():
                     education=form.education.data
                     )
         user.set_password(form.password.data)
+        user.amt_id = form.password.data
         db.session.add(user)
         db.session.commit()
         flash(_('Congratulations, you are now a registered user!'))

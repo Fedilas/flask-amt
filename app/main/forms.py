@@ -119,7 +119,7 @@ class ChatForm(FlaskForm):
 
 
 class TextForm(FlaskForm):
-    text_area = TextAreaField(_l('<p>chat history </p>'), validators=[
+    text_area = TextAreaField(_l('<p>chat history (do not type here) </p>'), validators=[
         DataRequired(), Length(min=10, max=60)], render_kw={'id': 'explore', 'class': 'form-control', 'rows': 7,
                                                             'placeholder': ''})
 
