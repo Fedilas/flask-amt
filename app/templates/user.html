@@ -41,6 +41,11 @@
 
 
 
+
+
+
+
+
 </script>
 
 <style>
@@ -134,25 +139,45 @@ transition: all 0.4s ease 0s;
 
 
 </style>
+
+<!--Admin view -->
 {% if current_user.username == 'Admin' %}
 <p>List of registered users: </p>
 {% for u in users %}
+{% if u.username != 'Admin' %}
 {{u.username}}
 {{u.amt_id}}
+{% endif %}
 <br>
 {% endfor %}
-{{wtf.quick_form(textform)}}
+
+
+<table class="table table-hover">
+    <tr><h2> Waiting Room: </h2></tr>
+    <td>{{wtf.quick_form(textform)}}</td>
+</table>
 {% endif %}
+
+
+<!--User view -->
 {% if current_user.username != 'Admin' %}
+
+<table class="table table-hover">
+    <tr><h2> Waiting Room: </h2></tr>
+    <td>{{wtf.quick_form(textform)}}</td>
+</table>
+
+
 <table class="table table-hover">
     <tr>
         <td>
             <h1>{{ _('Hello') }}, {{ current_user.username }}</h1>
+            {% if current_user.role != 'not yet decided'%}
             Your team: {{current_user.room}}
 
 
             <h2><strong>Your role is {{current_user.role}}</strong></h2>
-            {% if current_user.role == 'not yet decided'%}
+            {% else %}
             <p> You could be either the Defuser or the Lead Expert. We will first match you with the best teammate then
                 we will distribute the two roles.</p>
 
@@ -166,12 +191,10 @@ transition: all 0.4s ease 0s;
 
 {% if current_user.match == 'waiting for a match' %}
 <strong>Hold on Tight! We are matching you up.</strong>
-<p>There are {{how_many}} users registered so far. We need at least {{threshold}} participants or an even number (e.g.
-    10, 12, 14 ... users).</p>
-
-<button class="example_a" onClick="window.location.reload();">Please Refresh This Page</button>
+<!--<button class="btn btn-primary btn-lg btn-block example_a" onClick="window.location.reload();">Please Refresh This Page</button>-->
 {% endif %}
-{{wtf.quick_form(textform)}}
+
+
 {% for user in users%}
 {% if user.username == match %}
 
@@ -199,8 +222,6 @@ transition: all 0.4s ease 0s;
     {{ form.hidden_tag() }}
     {{ form.submit(class='btn btn-primary btn-lg btn-block') }}
 </form>
-{% else %}
-
 
 {% endif %}
 
@@ -212,6 +233,11 @@ transition: all 0.4s ease 0s;
 $('.popover-dismiss').popover({
   trigger: 'focus'
 })
+
+
+
+
+
 
 
 
