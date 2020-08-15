@@ -40,6 +40,7 @@
 
 
 
+
 </script>
 
 <style>
@@ -131,9 +132,18 @@ transition: all 0.4s ease 0s;
 }
 
 
+
 </style>
-
-
+{% if current_user.username == 'Admin' %}
+<p>List of registered users: </p>
+{% for u in users %}
+{{u.username}}
+{{u.amt_id}}
+<br>
+{% endfor %}
+{{wtf.quick_form(textform)}}
+{% endif %}
+{% if current_user.username != 'Admin' %}
 <table class="table table-hover">
     <tr>
         <td>
@@ -152,7 +162,7 @@ transition: all 0.4s ease 0s;
         </td>
     </tr>
 </table>
-{{wtf.quick_form(textform)}}
+
 
 {% if current_user.match == 'waiting for a match' %}
 <strong>Hold on Tight! We are matching you up.</strong>
@@ -161,7 +171,7 @@ transition: all 0.4s ease 0s;
 
 <button class="example_a" onClick="window.location.reload();">Please Refresh This Page</button>
 {% endif %}
-
+{{wtf.quick_form(textform)}}
 {% for user in users%}
 {% if user.username == match %}
 
@@ -197,10 +207,12 @@ transition: all 0.4s ease 0s;
 
 {% endif %}
 {% endfor%}
+{% endif %}
 <script>
 $('.popover-dismiss').popover({
   trigger: 'focus'
 })
+
 
 
 
