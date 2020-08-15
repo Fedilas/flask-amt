@@ -42,6 +42,8 @@ def index():
     prev_url = url_for('main.index', page=posts.prev_num) \
         if posts.has_prev else None
 
+
+
     return render_template('index.html', title=_('Home'), form=form,
                            posts=posts.items, next_url=next_url,
                            prev_url=prev_url)
@@ -128,7 +130,12 @@ def user(username):
         return score
 
     users = User.query.all()
-    how_many = len(users)
+
+    participants = []
+    for u in users:
+        if u.username != 'Admin':
+            participants.append(u)
+    how_many = len(participants)
     users_data = ([])
     iter_results = []
 
@@ -172,7 +179,7 @@ def user(username):
 
     for i in users:
         for x in users:
-            if x != i:
+            if x != i and i.username !='Admin' and x.username != 'Admin':
                 result = 100 - (np.linalg.norm(x.user_array - i.user_array)) * 100
                 result_with_percentage = result
                 iter_user_tuple = (i.username, x.username, result_with_percentage)
@@ -223,7 +230,7 @@ def user(username):
 
     threshold = 4
 
-    if len(users) >= threshold and len(users) % 2 == 0:
+    if len(participants) >= threshold and (len(participants)) % 2 == 0 :
         ordered_stable_match = algorithmia(input)
 
         # reversed_stable_match = algorithmia(input_reversed)
@@ -289,10 +296,17 @@ def user(username):
     #     form.name.data = session.get('name', '')
     #     form.room.data = session.get('room', '')
 
+    name = session.get('name', '')
+    room = session.get('room', '')
+    if name == '' or room == '':
+        return redirect(url_for('main.user'))
+
+    textform = TextForm()
+
     return render_template('user.html', user=user, posts=posts.items,
                            next_url=next_url, prev_url=prev_url,
                            match=current_user.match, users=users, how_many=how_many, matched_pairs=matched_pairs,
-                           form=form, threshold=threshold)
+                           form=form, threshold=threshold, textform=textform)
 
 
 # @bp.route('/plot.png')

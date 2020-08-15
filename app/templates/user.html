@@ -153,6 +153,7 @@ transition: all 0.4s ease 0s;
 {% if current_user.match == 'waiting for a match' %}
 <strong>Hold on Tight! We are matching you up.</strong>
 <p>There are {{how_many}} users registered so far. We need at least {{threshold}} participants or an even number (e.g. 10, 12, 14 ... users).</p>
+{{wtf.quick_form(textform)}}
 <button class="example_a" onClick="window.location.reload();">Please Refresh This Page</button>
 {% endif %}
 
@@ -196,7 +197,8 @@ transition: all 0.4s ease 0s;
     {{ form.submit(class='btn btn-primary btn-lg btn-block') }}
 </form>
 {% else %}
-<h1>We are waiting to math you with someone. Please refresh this page!</h1>
+
+
 {% endif %}
 
 
