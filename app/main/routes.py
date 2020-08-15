@@ -287,18 +287,24 @@ def user(username):
 
     ####### END Stable Matchmaking ########
 
+
+    # elif request.method == 'GET':
+    #     form.name.data = session.get('name', '')
+    #     form.room.data = session.get('room', '')
+
+    session['name'] = current_user.username
+    session['room'] = 'common'
+
+    textform = TextForm()
+
+
     form = ChatForm()
     if form.validate_on_submit():
         session['name'] = current_user.username
         session['room'] = current_user.room
         return redirect(url_for('main.explore', username=username))
-    # elif request.method == 'GET':
-    #     form.name.data = session.get('name', '')
-    #     form.room.data = session.get('room', '')f
 
 
-
-    textform = TextForm()
 
 
 
