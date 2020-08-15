@@ -2,46 +2,7 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
-<script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
-<script type="text/javascript" charset="utf-8">
-            var socket;
-            $(document).ready(function(){
-                socket = io.connect('http://' + document.domain + ':' + location.port + '/user');
-                socket.on('connect', function() {
-                    socket.emit('joined', {});
-                });
-                socket.on('status', function(data) {
-                    $('#user').val($('#user').val() + '<' + data.msg + '>\n');
-                    $('#user').scrollTop($('#user')[0].scrollHeight);
-                });
-                socket.on('message', function(data) {
-                    $('#user').val($('#user').val() + data.msg + '\n');
-                    $('#user').scrollTop($('#user')[0].scrollHeight);
-                });
-                $('#text').keypress(function(e) {
-                    var code = e.keyCode || e.which;
-                    if (code == 13) {
-                        text = $('#text').val();
-                        $('#text').val('');
-                        socket.emit('text', {msg: text});
-                    }
-                });
-            });
-            function leave_room() {
-                socket.emit('left', {}, function() {
-                    socket.disconnect();
 
-                    // go back to the login page
-                    window.location.href = "{{ url_for('main.user', username=username) }}";
-                });
-            }
-
-
-
-
-
-</script>
 
 <style>
     #seewho2{
@@ -132,20 +93,6 @@ transition: all 0.4s ease 0s;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </style>
 
 
@@ -173,7 +120,7 @@ transition: all 0.4s ease 0s;
 <strong>Hold on Tight! We are matching you up.</strong>
 <p>There are {{how_many}} users registered so far. We need at least {{threshold}} participants or an even number (e.g.
     10, 12, 14 ... users).</p>
-{{wtf.quick_form(textform)}}
+
 <button class="example_a" onClick="window.location.reload();">Please Refresh This Page</button>
 {% endif %}
 

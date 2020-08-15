@@ -290,12 +290,4 @@ class Chat(db.Model):
     def __repr__(self):
         return '<Message {}>'.format(self.body)
 
-class GlobalChat(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.String(140))
-    user = db.Column(db.String(140))
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-
-    def __repr__(self):
-        return '<Message {}>'.format(self.body)
 

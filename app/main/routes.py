@@ -291,71 +291,23 @@ def user(username):
     if form.validate_on_submit():
         session['name'] = current_user.username
         session['room'] = current_user.room
-        return redirect(url_for('main.explore', username=username))
+        return redirect(url_for('main.explore'))
     # elif request.method == 'GET':
     #     form.name.data = session.get('name', '')
     #     form.room.data = session.get('room', '')
 
-    name = session.get('name', '')
-    room = session.get('room', '')
-    if name == '' or room == '':
-        return redirect(url_for('main.user', username=username))
 
-    textform = TextForm()
+
+
 
 
     return render_template('user.html', user=user, posts=posts.items,
                            next_url=next_url, prev_url=prev_url,
                            match=current_user.match, users=users, how_many=how_many, matched_pairs=matched_pairs,
-                           form=form, threshold=threshold, textform=textform)
+                           form=form, threshold=threshold)
 
 
-# @bp.route('/plot.png')
-# @login_required
-# def plot_png():
-#     fig = create_figure()
-#     output = io.BytesIO()
-#     FigureCanvas(fig).print_png(output)
-#     return Response(output.getvalue(), mimetype='image/png')
-#
-#
-# def transform_score(score):
-#     if score == 'Very Low':
-#         score = 1
-#     elif score == 'Low':
-#         score = 2
-#     elif score == 'Moderate':
-#         score = 3
-#     elif score == 'Good':
-#         score = 4
-#     elif score == 'High':
-#         score = 5
-#
-#         return score
-#     return score
-#
-#
-# def create_figure():
-#     users = User.query.all()
-#     for i in users:
-#         i.user_list = [i.extraversion, i.agreeableness,
-#                        i.conscientiousness,
-#                        i.neuroticism, i.openness]
-#
-#         i.user_list = [int(numeric_string) for numeric_string in i.user_list]
-#
-#     fig = Figure()
-#     cols = ["extraversion", "agreeableness", "conscientiousness", "neuroticism", "openness"]
-#     data = i.user_list
-#     angles = np.linspace(0, 2 * np.pi, len(cols), endpoint=False)
-#     stats = np.concatenate((data, [data[0]]))
-#     angles = np.concatenate((angles, [angles[0]]))
-#     ax = fig.add_subplot(111, polar=True)
-#     ax.plot(angles, stats, "o-")
-#     ax.fill(angles, stats, alpha=0.25)
-#     ax.set_thetagrids(angles * 180 / np.pi, cols)
-#
-#     return fig
+
 
 
 @bp.route('/user/<username>/popup', methods=['GET', 'POST'])
