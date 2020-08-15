@@ -291,20 +291,21 @@ def user(username):
     if form.validate_on_submit():
         session['name'] = current_user.username
         session['room'] = current_user.room
-        return redirect(url_for('main.explore'))
+        return redirect(url_for('main.explore', username=username))
     # elif request.method == 'GET':
     #     form.name.data = session.get('name', '')
-    #     form.room.data = session.get('room', '')
+    #     form.room.data = session.get('room', '')f
 
 
 
+    textform = TextForm()
 
 
 
     return render_template('user.html', user=user, posts=posts.items,
                            next_url=next_url, prev_url=prev_url,
                            match=current_user.match, users=users, how_many=how_many, matched_pairs=matched_pairs,
-                           form=form, threshold=threshold)
+                           form=form, threshold=threshold, textform=textform)
 
 
 
