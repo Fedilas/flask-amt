@@ -299,7 +299,7 @@ def user(username):
     name = session.get('name', '')
     room = session.get('room', '')
     if name == '' or room == '':
-        return redirect(url_for('main.user'), username=username)
+        return redirect(url_for('main.user', username=username))
 
     textform = TextForm()
 
