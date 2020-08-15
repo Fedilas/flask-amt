@@ -299,9 +299,10 @@ def user(username):
     name = session.get('name', '')
     room = session.get('room', '')
     if name == '' or room == '':
-        return redirect(url_for('main.user'))
+        return redirect(url_for('main.user'), username=username)
 
     textform = TextForm()
+
 
     return render_template('user.html', user=user, posts=posts.items,
                            next_url=next_url, prev_url=prev_url,
