@@ -33,7 +33,7 @@
                     socket.disconnect();
 
                     // go back to the login page
-                    window.location.href = "{{ url_for('main.user', username=username) }}";
+                    window.location.href = "{{ url_for('main.explore', username=username) }}";
                 });
             }
 
@@ -220,7 +220,7 @@ transition: all 0.4s ease 0s;
 
 <form method="POST">
     {{ form.hidden_tag() }}
-    {{ form.submit(class='btn btn-primary btn-lg btn-block', onclick="leave_room()") }}
+    {{ form.submit(class='btn btn-primary btn-lg btn-block') }}
 </form>
 
 {% endif %}
