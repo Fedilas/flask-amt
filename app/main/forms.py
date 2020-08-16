@@ -116,7 +116,9 @@ class CodeForm(FlaskForm):
     other = TextAreaField(_l('Any other comments?'), validators=[
         Optional(), Length(min=1, max=30)])
 
-    submit = SubmitField(render_kw={'id': 'code', "type": "submit", "value": "Submit"})
+    submit = SubmitField(
+        render_kw={"class": "btn btn-primary btn-lg btn-block", 'id': 'code', "type": "submit", "value": "Submit",
+                   "onclick": "leave_room()"})
 
 
 class ChatForm(FlaskForm):

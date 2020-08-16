@@ -42,6 +42,8 @@
 
 
 
+
+
 </script>
 </head>
 <div class="container">
@@ -88,20 +90,12 @@
 <div class="container">
     <br>
     <hr>
-<!--    <a class="btn btn-primary btn-lg btn-block" data-toggle="collapse" href="#collapseExample" role="button"-->
-<!--       aria-expanded="false"-->
-<!--       aria-controls="collapseExample">-->
-<!--        End of Task Questionnaire ( Click to expand )-->
-<!--    </a>-->
-<!--    <div class="collapse" id="collapseExample">-->
-        <div class="card card-body">
-            {{wtf.quick_form(form)}}
 
-        </div>
+    <form class="form form-horizontal" method="post" role="form">
+        {{ form.hidden_tag() }}
+        {{wtf.quick_form(form)}}
 
-
-<!--    </div>-->
-
+    </form>
 
 </div>
 
