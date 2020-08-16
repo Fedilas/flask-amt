@@ -220,7 +220,7 @@ transition: all 0.4s ease 0s;
 
 <form method="POST">
     {{ form.hidden_tag() }}
-    {{ form.submit(class='btn btn-primary btn-lg btn-block') }}
+    {{ form.submit(class='btn btn-primary btn-lg btn-block', onclick="leave_room();) }}
 </form>
 
 {% endif %}
